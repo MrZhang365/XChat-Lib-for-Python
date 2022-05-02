@@ -27,19 +27,18 @@ def whisper_got(message,nick):
 #错误处理函数，当服务器告知客户端有错误时，将会调用这个。
 def kill_errors(info):
     print("出错啦！详细信息：{}".format(info))
-xc=XChat.XChat("dev","TestBot","TestBotPassword")  #实例化类，要提供三个参数，分别代表：聊天室名称、客户端昵称、可选密码。
+xc=XChat.XChat("xq102210","TestBot","TestBotPassword")  #实例化类，要提供三个参数，分别代表：聊天室名称、客户端昵称、可选密码。
 xc.message_function+=[message_got]  #message_function 是一个列表，里面存放着信息处理函数。后面的以“_function”结尾的，都是如此。这个列表存放着信息接收函数。每个列表都可以添加多个函数。
 xc.join_function+=[user_join]   #这个列表储存着用户加入处理函数。
 xc.leave_function+=[user_leave] #这个列表存放着用户离开处理函数。
 xc.whisper_function+=[whisper_got]  #这个列表存放着私信处理函数。
 xc.error_function+=[kill_errors]    #这个列表存放错误处理函数。如果没有设置，将会使用库中自带的处理函数。建议添加自己的错误处理函数。
 time.sleep(1)
-xc.send_message("Hello World !")    #在公屏上发送信息
+xc.send_message("Hello World !")    #在公屏上发送信息，有两个参数，第一个是信息，另一个是是否显示在历史记录中显示，默认为False。
 time.sleep(1)
 xc.send_image("https://xq.kzw.ink/imgs/tx.png") #发送图片，只有一个参数，即图像地址
 time.sleep(1)
 print("图片字符串："+xc.get_image_text("https://xq.kzw.ink/imgs/tx.png")) #获取图片字符串，该字符串用来发送图片，参数只有一个，即图像地址
-xc.send_big_message("大字测试","green") #使用LaTeX发送大字，第一个参数是内容，第二个参数是颜色，字符串类型，默认为红色。
 #xc.send_to("目标","要发送的信息")   #发送私信，需要两个参数，分别是：目标、要发送的信息。
 #xc.move("新的聊天室")   #该方法可以把自己移动到另一个聊天室。该方法过于简单，不做介绍。
 #xc.change_nick("新的昵称")  #该方法可以修改自己的昵称，由于过于简单，所以不做介绍。
