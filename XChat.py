@@ -19,10 +19,11 @@ class XChat:    #一个类
         self.ws = websocket.create_connection("wss://xq.kzw.ink/ws",sslopt={"cert_reqs": ssl.CERT_NONE})
         self.send_packet({"cmd": "join", "channel": channel, "nick": nick,"password":password})
         threading.Thread(target=self.ping_thread).start()
-    def send_message(self, msg):
-        self.send_packet({"cmd": "chat", "text": msg,"head":self.head_url,"show":"1"})
-    def send_big_message(self,msg,color="red"):
-        self.send_packet({"cmd":"chat","text":"$$\\Huge\color{"+str(color)+"}{"+msg+"}$$","head":self.head_url,"show":"1"})
+    def send_message(self, msg,show=False):
+        if show:
+            self.send_packet({"cmd": "chat", "text": msg,"head":self.head_url,"show":"1"})
+        else:
+            self.send_packet({"cmd": "chat", "text": msg,"head":self.head_url})
     def send_to(self, target, msg):
         self.send_packet({"cmd": "whisper", "nick": target, "text": msg})
     def move(self, new_channel):
