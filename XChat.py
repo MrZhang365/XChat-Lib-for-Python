@@ -5,10 +5,11 @@ import websocket
 import ssl
 class XChat:    #一个类
     userset=False
-    def __init__(self,channel,nick,password="",headurl="https://xq.kzw.ink/imgs/tx.png"):
+    def __init__(self,token,channel,nick,password="",headurl="https://xq.kzw.ink/imgs/tx.png"):
         self.channel = channel
         self.nick = nick
         self.password=password
+        self.token=token
         self.head_url=headurl
         self.online_users = []
         self.message_function = []
@@ -17,7 +18,7 @@ class XChat:    #一个类
         self.leave_function = []
         self.error_function = []
         self.ws = websocket.create_connection("wss://xq.kzw.ink/ws",sslopt={"cert_reqs": ssl.CERT_NONE})
-        self.send_packet({"cmd": "join", "channel": channel, "nick": nick,"password":password})
+        self.send_packet({"cmd": "join", "channel": channel, "nick": nick,"password":password,"token":token})
         threading.Thread(target=self.ping_thread).start()
     def send_message(self, msg,show=False):
         if show:
