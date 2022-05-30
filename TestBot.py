@@ -27,7 +27,7 @@ def whisper_got(message,nick):
 #错误处理函数，当服务器告知客户端有错误时，将会调用这个。
 def kill_errors(info):
     print("出错啦！详细信息：{}".format(info))
-xc=XChat.XChat("xq102210","TestBot","TestBotPassword")  #实例化类，要提供三个参数，分别代表：聊天室名称、客户端昵称、可选密码。
+xc=XChat.XChat("机器人的token","xq102210","TestBot","TestBotPassword")  #实例化类，要提供4个参数，分别是：机器人的token（请向XChat管理员申请）、聊天室名称、客户端昵称、可选密码。
 xc.message_function+=[message_got]  #message_function 是一个列表，里面存放着信息处理函数。后面的以“_function”结尾的，都是如此。这个列表存放着信息接收函数。每个列表都可以添加多个函数。
 xc.join_function+=[user_join]   #这个列表储存着用户加入处理函数。
 xc.leave_function+=[user_leave] #这个列表存放着用户离开处理函数。
