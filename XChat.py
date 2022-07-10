@@ -18,7 +18,7 @@ class XChat:    #一个类
         self.leave_function = []
         self.error_function = []
         self.ws = websocket.create_connection("wss://xq.kzw.ink/ws",sslopt={"cert_reqs": ssl.CERT_NONE})
-        self.send_packet({"cmd": "join", "channel": channel, "nick": nick,"password":password,"token":token})
+        self.send_packet({"cmd": "join", "channel": channel, "nick": nick,"password":password,"token":token,"client_key":"ZhangSoft_"})
         threading.Thread(target=self.ping_thread).start()
     def send_message(self, msg,show=False):
         if show:
