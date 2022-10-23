@@ -47,16 +47,22 @@ class XChat:    #一个类
         while True:
             result = json.loads(self.ws.recv())
             if result["cmd"] == "chat" and not result["nick"] == self.nick:
+                trip = ''
+                if 'trip' in result:
+                    trip = result['trip']
                 for function in list(self.message_function):
                     if return_more==False:
-                        function(result["text"], result["nick"])
+                        function(result["text"], result["nick"],trip)
                     else:
                         function(result)
             elif result["cmd"] == "onlineAdd":
                 self.online_users.append(result["nick"])
+                trip = ''
+                if 'trip' in result:
+                    trip = result['trip']
                 for function in list(self.join_function):
                     if return_more==False:
-                        function(result["nick"])
+                        function(result["nick"],trip)
                     else:
                         function(result)
             elif result["cmd"] == "onlineRemove":
@@ -70,9 +76,12 @@ class XChat:    #一个类
                 for nick in result["nicks"]:
                     self.online_users.append(nick)
             elif result["cmd"] == "info" and result.get("type") == "whisper":
+                trip = ''
+                if 'trip' in result:
+                    trip = result['trip']
                 for function in list(self.whisper_function):
                     if return_more==False:
-                        if "from" in result:function(result["text"][len(result["from"])+12:],result["from"])
+                        if "from" in result:function(result["msg"],result["from"],trip)
                     else:
                         function(result)
             elif result["cmd"]=="warn":
