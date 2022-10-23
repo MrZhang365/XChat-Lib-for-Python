@@ -5,13 +5,13 @@ import XChat    #引入模块
 import time #引入模块
 
 #信息接收处理函数，当有人在公屏上发送信息时，会调用这个。
-#两个参数分别代表：信息内容和发送者。
-def message_got(message,sender):
+#3个参数分别代表：信息内容、发送者、识别码。
+def message_got(message,sender,trip):
     print('收到 {who} 在公屏上发送的信息：{msg}'.format(who=sender,msg=message))
 
 #用户加入处理函数，当有人加入当前聊天室，会调用这个。
-#只有一个参数，这个参数代表昵称。
-def user_join(nick):
+#只有2个参数，第一个参数代表昵称，第二个代表识别码。
+def user_join(nick,trip):
     print("{user} 加入聊天室".format(user=nick))
 
 #用户离开处理函数，当有人离开当前聊天室，会调用这个。
@@ -20,8 +20,8 @@ def user_leave(nick):
     print("{user} 离开聊天室".format(user=nick))
 
 #私信处理函数，当有人向客户端发送私信时，会调用这个。
-#有两个参数，分别代表：私信内容和发送者。
-def whisper_got(message,nick):
+#有3个参数，分别代表：私信内容、发送者和识别码。
+def whisper_got(message,nick,trip):
     print("{user} 向你发送了一条私信：{msg}".format(user=nick,msg=message))
 
 #错误处理函数，当服务器告知客户端有错误时，将会调用这个。
